@@ -1,5 +1,5 @@
 # 🧠🚫 BRAINLESS  
-## **Zero brain cells required. Because honestly? We know you weren’t using them anyway.**
+**Zero brain cells required. Because honestly? We know you weren’t using them anyway.**
 
 ## The Problem  
 Using your actual brain to debug? Kinda cringe. That gray matter is for doomscrolling and memorizing lore, not figuring out why `undefined` is not a function.
@@ -26,5 +26,5 @@ Don’t overthink it. Just admit defeat and type:
 ```bash
 imdumb #or L
 ```
-## Important
+## ⚖️ Important
 **Running Brainless, you legally agree that the AI is smarter than you.**
