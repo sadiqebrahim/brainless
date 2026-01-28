@@ -28,3 +28,5 @@ imdumb #or L
 ```
 ## ⚖️ Important
 **Running Brainless, you legally agree that the AI is smarter than you.**
+
+![alt text](https://github.com/sadiqebrahim/brainless/assets/you.png?raw=true)
