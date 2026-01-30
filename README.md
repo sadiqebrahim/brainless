@@ -19,6 +19,36 @@ Using your actual brain to debug? Kinda cringe. That gray matter is for doomscro
 
 ---
 
+
+## Installation (Don't overthink it)
+
+You need Python 3. If you don't have that, I can't save you.
+1. Clone the repo
+
+Download this folder. Put it somewhere safe. Don't lose it.
+2. Run the lazy installer
+
+We wrote a script so you don't have to touch your config files manually. It detects if you're on Mac, Linux, or Windows and sets up the L alias for you.
+Bash
+
+```bash
+git clone https://github.com/sadiqebrahim/brainless.git
+cd brainless
+python3 setup.py
+```
+3. Refresh your shell
+
+The installer will tell you exactly what to type at the end (usually source ~/.zshrc or restarting PowerShell). Do what it says.
+4. Set your API Key
+
+If you are using the Cloud Mode (default), export your Gemini API key.
+
+    Mac/Linux: export GEMINI_API_KEY="your_key_here"
+
+    Windows: $env:GEMINI_API_KEY="your_key_here"
+
+(Pro tip: Add that line to your .zshrc or .bashrc so you don't have to type it every time. Or don't. See if I care.)
+
 ## 🚀 How to Run It
 
 Don’t overthink it. Just admit defeat and type:
