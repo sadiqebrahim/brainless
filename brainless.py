@@ -143,8 +143,9 @@ init(autoreset=True)
 
 # --- CONFIGURATION ---
 # "local" for Ollama, "api" for Gemini/OpenAI
-MODE = "local"
+# MODE = "local"
 # MODE = "api" 
+MODE = "server"
 
 # OLLAMA SETTINGS
 OLLAMA_URL = "http://localhost:11434/api/generate"
@@ -252,6 +253,48 @@ def ask_gemini(prompt):
 
     except Exception as e:
         return f"Connection Error: {e}"
+    
+def ask_server(prompt):
+
+    url = "http://172.16.14.56:8000/v1/chat/completions"
+    headers = {'Content-Type': 'application/json'}
+    data = {"model": "meta/llama-3.3-70b-instruct",
+            "messages": [
+                    {"role": "system", "content": "You are a code debugger."},
+                    {"role": "system", "content": prompt}
+            ],
+            "temperature": 0.5,
+            "top_p": 0.1,
+            "max_tokens": 1000
+    }
+    
+    try:
+        response = requests.post(url, headers=headers, json=data)
+        response_data = response.json()
+
+        if "error" in response_data:
+            # OpenAI-style error object
+            err = response_data["error"]
+            return f"API Error: {err.get('message', 'Unknown error')}"
+
+        if "choices" in response_data and response_data["choices"]:
+            choice = response_data["choices"][0]
+
+            # Normal (non-streaming)
+            if "message" in choice and choice["message"]:
+                return choice["message"].get("content", "")
+
+            # Some servers may return `text` (completions-style)
+            if "text" in choice:
+                return choice.get("text", "")
+
+            return "Error: Missing content in response choices."
+
+        return "Error: Unexpected response format."
+
+
+    except Exception as e:
+        return f"Connection Error: {e}"
 
 def main():
     if len(sys.argv) < 2:
@@ -307,6 +350,8 @@ def main():
     try:
         if MODE == "local":
             ai_response = ask_local_ollama(prompt)
+        elif MODE == "server":
+            ai_response = ask_server(prompt)
         else:
             ai_response = ask_gemini(prompt)
     finally:
